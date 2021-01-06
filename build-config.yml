@@ -1,0 +1,24 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: my-build-config123
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'simple-webapp-docker:latest'
+  resources: {}
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: DockerImage
+        name: 'ubuntu:16.04'
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/ahladh/simple-webapp-docker.git'
+      ref: master
+  triggers:
+    - type: ConfigChange	
+
